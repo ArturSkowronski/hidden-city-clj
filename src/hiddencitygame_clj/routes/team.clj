@@ -1,12 +1,13 @@
 (ns hiddencitygame-clj.routes.team
   (:require [hiddencitygame-clj.layout :as layout]
+            [hiddencitygame-clj.entity.team :as team]
             [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :refer [ok]]
             [clojure.java.io :as io]
             [bouncer.core :as b]
             [bouncer.validators :as v]
   )
-  )
+)
 
 (defroutes register-team-routes
    (POST "/registerTeam" []
@@ -43,7 +44,7 @@
        {
         :status  200
         :headers {"Content-Type" "application/json"}
-        :body    {:foo (str "joinTeam:" gcm ":" code)}
+        :body    {:foo (team/decorate-message (str "joinTeam:" gcm ":" code))}
         })
      )
    )
