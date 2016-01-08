@@ -3,25 +3,36 @@
             [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :refer [ok]]
             [clojure.java.io :as io])
-)
+  )
 
 (defroutes register-team-routes
-    (POST "/registerTeam" []
-       {
-        :status 200
-        :headers {"Content-Type" "application/json"}
-        :body {:foo (str "OK") }
-        }
+   (POST "/registerTeam" []
+     (fn [req]
+       (let [
+             data (get (:params req) "data")
+            ]
+         {
+          :status  200
+          :headers {"Content-Type" "application/json"}
+          :body    {:foo (str "registerTeam:" data)}
+          }
        )
-)
-
-(defroutes join-team-routes
-   (POST "/joinTeam" []
-       {
-        :status 200
-        :headers {"Content-Type" "application/json"}
-        :body {:foo (str "OK") }
-        }
+     )
    )
 )
 
+(defroutes join-team-routes
+ (POST "/joinTeam" []
+   (fn [req]
+     (let [
+           data (get (:params req) "data")
+           ]
+       {
+        :status  200
+        :headers {"Content-Type" "application/json"}
+        :body    {:foo (str "joinTeam:" data)}
+        }
+       )
+     )
+   )
+ )

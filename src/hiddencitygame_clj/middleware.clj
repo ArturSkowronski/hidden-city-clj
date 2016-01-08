@@ -5,6 +5,7 @@
             [ring.middleware.flash :refer [wrap-flash]]
             [immutant.web.middleware :refer [wrap-session]]
             [ring.middleware.webjars :refer [wrap-webjars]]
+            [ring.middleware.format :refer [wrap-restful-format]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [ring.middleware.format :refer [wrap-restful-format]]
@@ -45,12 +46,13 @@
         :title "Invalid anti-forgery token"})}))
 
 (defn wrap-formats [handler]
-  (wrap-restful-format handler {:formats [:json-kw :transit-json :transit-msgpack]}))
+  (wrap-restful-format handler {:formats [:json :json-kw :transit-json :transit-msgpack]}))
 
 (defn wrap-base [handler]
   (-> ((:middleware defaults) handler)
       wrap-formats
       wrap-webjars
+      wrap-restful-format
       wrap-flash
       (wrap-session {:cookie-attrs {:http-only true}})
       (wrap-defaults

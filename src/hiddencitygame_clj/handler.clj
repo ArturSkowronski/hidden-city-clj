@@ -36,8 +36,8 @@
   (routes
     (wrap-routes #'home-routes middleware/wrap-csrf)
     (wrap-routes #'view-routes middleware/wrap-csrf)
-    (wrap-routes #'register-team-routes middleware/wrap-base)
-    (wrap-routes #'join-team-routes middleware/wrap-base)
+    (wrap-routes #'register-team-routes middleware/wrap-formats)
+    (wrap-routes #'join-team-routes middleware/wrap-formats)
     (route/not-found
       (:body
         (error-page {:status 404
