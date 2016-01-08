@@ -18,7 +18,7 @@
          {
           :status  200
           :headers {"Content-Type" "application/json"}
-          :body    {:foo (str "registerTeam:" gcm)}
+          :body    (team/generate-team gcm)
           }
        )
      )
@@ -44,7 +44,7 @@
        {
         :status  200
         :headers {"Content-Type" "application/json"}
-        :body    {:foo (team/decorate-message (str "joinTeam:" gcm ":" code))}
+        :body    (team/add-player gcm {:team-code code})
         })
      )
    )
