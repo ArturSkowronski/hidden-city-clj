@@ -25,14 +25,6 @@
    )
 )
 
-(defn validate-message [params]
-  (first
-    (b/validate
-      params
-      :gcm v/required
-    )
-  )
-)
 
 (defroutes join-team-routes
  (POST "/joinTeam" []
