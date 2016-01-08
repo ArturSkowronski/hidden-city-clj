@@ -2,6 +2,8 @@
   (:require [compojure.core :refer [defroutes routes wrap-routes]]
             [hiddencitygame-clj.layout :refer [error-page]]
             [hiddencitygame-clj.routes.home :refer [home-routes]]
+            [hiddencitygame-clj.routes.view :refer [view-routes]]
+            [hiddencitygame-clj.routes.team :refer [register-team-routes join-team-routes]]
             [hiddencitygame-clj.middleware :as middleware]
             [clojure.tools.logging :as log]
             [compojure.route :as route]
@@ -33,6 +35,9 @@
 (def app-routes
   (routes
     (wrap-routes #'home-routes middleware/wrap-csrf)
+    (wrap-routes #'view-routes middleware/wrap-csrf)
+    (wrap-routes #'register-team-routes middleware/wrap-base)
+    (wrap-routes #'join-team-routes middleware/wrap-base)
     (route/not-found
       (:body
         (error-page {:status 404
