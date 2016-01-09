@@ -13,10 +13,11 @@
   )
 
 (defn generate-team [gcm]
-  (player/createGameMaster {:gcm gcm})
+  "Generate New Team"
   {
-   :type       (str "generate-team")
-   :parameters (str gcm)
+   :type         (str "generate-team")
+   :parameters   (str gcm)
+   :saved-record (get (player/create-game-master {:gcm gcm}) :_id)
    }
   )
 
