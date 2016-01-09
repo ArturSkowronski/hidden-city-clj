@@ -1,6 +1,7 @@
 (ns hiddencitygame-clj.entity.team
   (:require [bouncer.core :as b]
             [bouncer.validators :as v]
+            [hiddencitygame-clj.entity.player :as player]
             ))
 
 (defn validate-message [params]
@@ -12,13 +13,12 @@
   )
 
 (defn generate-team [gcm]
+  (player/createGameMaster {:gcm gcm})
   {
    :type       (str "generate-team")
    :parameters (str gcm)
    }
   )
-
-
 
 (defn add-player [gcm team-map]
   (validate-message team-map)
@@ -27,4 +27,6 @@
    :parameters (str gcm ";" (get team-map :team-code))
    }
   )
+
+
 
