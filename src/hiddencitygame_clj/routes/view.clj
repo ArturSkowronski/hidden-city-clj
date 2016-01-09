@@ -5,14 +5,11 @@
             [clojure.java.io :as io]))
 
 (defroutes view-routes
-     (GET "/view/:id" [id] []
-           {
-            :status 200
-            :headers {"Content-Type" "application/json"}
-            :body {:foo (str id) }
-            }
-     )
+   (GET "/view/:id" [id] []
+        {
+        :status 200
+        :headers {"Content-Type" "application/json"}
+        :body {:foo (str id) }
+        }
+   )
 )
-
-
-

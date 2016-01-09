@@ -1,20 +1,30 @@
 (ns hiddencitygame-clj.entity.team
-  (:require [bouncer.core :as b]))
-
-(defn generate-team [gcm]
-   {:foo (str "decorated1:" gcm)}
-)
-
-(defn add-player [gcm team-map]
-   {:foo (str "decorated1:" gcm (get team-map :team-code))}
-)
-
+  (:require [bouncer.core :as b]
+            [bouncer.validators :as v]
+            ))
 
 (defn validate-message [params]
-  (first
-    (b/validate
-      params
-      :gcm v/required
-      )
+  (print "Testing")
+  (b/validate
+    params
+    :team-code v/required
     )
   )
+
+(defn generate-team [gcm]
+  {
+   :type       (str "generate-team")
+   :parameters (str gcm)
+   }
+  )
+
+
+
+(defn add-player [gcm team-map]
+  (validate-message team-map)
+  {
+   :type       (str "add-player")
+   :parameters (str gcm ";" (get team-map :team-code))
+   }
+  )
+
