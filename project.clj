@@ -15,6 +15,7 @@
                  [org.webjars/jquery "2.1.4"]
                  [org.clojure/tools.logging "0.3.1"]
                  [com.novemberain/monger "3.0.0-rc2"]
+                 [com.github.jknack/handlebars "4.0.2"]
                  [org.slf4j/slf4j-log4j12 "1.7.13"]
                  [org.apache.logging.log4j/log4j-core "2.5"]
                  [com.taoensso/tower "3.0.2"]
