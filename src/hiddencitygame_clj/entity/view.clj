@@ -18,6 +18,10 @@
   "Stub Method"
   [params]
   (let [hbs (Handlebars.)]
-   (.apply (.compileInline hbs (read-template (get params :tpl))) {"id" "test"})
+   (->
+     hbs
+     (.compileInline (read-template (get params :tpl)))
+     (.apply {"id" "test"})
+   )
   )
 )
