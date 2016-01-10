@@ -12,5 +12,6 @@
   (mc/insert-and-return db teams-coll {
                                        :_id  (ObjectId.)
                                        :teamCode (get team :team-code)
+                                       :currPlace (get team :start-place)
                                        })
 )
