@@ -12,6 +12,15 @@
   (mc/insert-and-return db teams-coll {
                                        :_id  (ObjectId.)
                                        :teamCode (get team :team-code)
+                                       :players (get team :players)
                                        :currPlace (get team :start-place)
                                        })
+)
+
+(defn find-one [params]
+    (mc/find db teams-coll params)
+)
+
+(defn add-player [match player]
+  (mc/update db teams-coll match {"$push" {:players player}})
 )

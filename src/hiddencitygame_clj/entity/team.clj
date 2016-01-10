@@ -20,19 +20,31 @@
   (+ 1000 (rand-int 8999))
   )
 
+(defn find-by-player-id
+  "Find Team By Player ID"
+  [player-id]
+  (model-team/find-one {:players {"$in" [player-id]}})
+  )
+
+(defn add-player-to-team
+  "Add Player to Team"
+  [team-code player]
+  (model-team/add-player {:teamCode team-code} player)
+  )
+
+
 (defn store-team-with-code
   "Store Team for code"
   [params]
   (try
     (model-team/store-team {
-                            :team-code (generate-team-code)
-                            :players   [(get params :player)]
+                            :team-code   (generate-team-code)
+                            :players     [(get params :player)]
                             :start-place [(get params :start-place)]
                             })
     (catch Exception e
       (store-team-with-code params)))
   )
-
 
 (defn generate-team [gcm]
   "Generate New Team"
@@ -46,23 +58,16 @@
    :parameters   (str gcm)
    :saved-record (get saved-team :_id)
    }
-  )
+)
 
-(defn add-player [gcm team-map]
-  (validate-message team-map)
-  {
-   :type       (str "add-player")
-   :parameters (str gcm ";" (get team-map :team-code))
-   }
-  )
+(defn add-player [gcm params]
+  (let [team-code (get params :team-code)]
 
-(defn add-player [gcm team-map]
-  (validate-message team-map)
-  {
-   :type       (str "add-player")
-   :parameters (str gcm ";" (get team-map :team-code))
-   }
+    (add-player-to-team team-code (player/create-player {:gcm gcm}))
+    {
+     :type       (str "add-player")
+     :parameters (str gcm ";" team-code)
+     })
   )
-
 
 

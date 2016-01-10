@@ -6,13 +6,19 @@
             )
   )
 
+(defn create-player
+  "create-player"
+  [params]
+  (player-model/store-player params)
+  )
+
 (defn create-game-master
   "Create Game Master"
   [params]
-
-  (def stored-model (player-model/store-player {
-                               :gcm  (get params :gcm)
-                               :role (role/findRandomRole)
-                               }))
+  (def stored-model (create-player {
+                   :gcm  (get params :gcm)
+                   :role (role/findRandomRole)
+                   }))
   stored-model
   )
+
