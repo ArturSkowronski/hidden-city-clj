@@ -16,12 +16,12 @@
 
 (defn render-view
   "Stub Method"
-  [params]
+  [data]
   (let [hbs (Handlebars.)]
    (->
      hbs
-     (.compileInline (read-template (get params :tpl)))
-     (.apply {"id" "test"})
+     (.compileInline (read-template (get data :tpl)))
+     (.apply (get data :params))
    )
   )
 )

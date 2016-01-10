@@ -10,7 +10,7 @@
         {
         :status 200
         :headers {"Content-Type" "application/json"}
-        :body {:tpl (view/render-view {:tpl "test"}) }
+        :body {:tpl (view/render-view {:tpl "test" :params {"id" id}}) }
         }
    )
 )
